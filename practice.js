@@ -1,15 +1,15 @@
 //We're in a job interview. Answer the following questions (try to not look at your notes unless you have to).
   // 1) What is the purpose of the 'this keyword'?
 
-      //Answer
+      //Answer This is used to point to an object. It makes a function reuseable.
 
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
-      //Answer
+      //Answer Explict = directly bound, Implict = implied where is it bound, Data= to the window, New= bound to a new object.
 
   // 3) What does .bind do?
 
-      //Answer
+      //Answer Bind tells where the funtion is drawing its parameters from.
 
 
 //Next Problem
@@ -19,16 +19,30 @@
   //email --> which is a string
   //getUsername --> which is a function that returns the current object's username property. *Don't use 'user' instead use the 'this' keyword*
 
-    //Code Here
+    var user = {
+    username: "",
+    email: "",
+    getUsername: function(){
+      return this.username;
+    }
+    }//Code Here
 
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
-
+//getUsername(user);
 
 //Next Problem
 
 
 // Write a constructor function, including method definitions, which will make the following function invocations function properly.
-
+function Car(make,model,year,move){
+  this.make = make;
+  this.nodel = model;
+  this.year = year;
+  this.move = 0;
+  this.moveCar = function(){
+    return this.move + 10;
+  }
+}
   //Function Invocations Here
 
 var prius = new Car('Toyota', 'Prius', 2011);
@@ -46,7 +60,7 @@ mustang.moveCar(); //increments mustang' move property by 10. Returns the new mo
 var getYear = function(){
   return this.year;
 };
-
+var getPriusYear = getYear.bind(prius);
 // Above you are given a getYear function.  Use the bind function to bind the prius object to the function and save it in a variable called getPriusYear
 // Then use the bind function to bind the mustang to the function and save it in a varabile called getMustangYear
 // Console Log the results of the getPriusYear and getMustangYear to see that they are returning the correct years.
@@ -69,15 +83,15 @@ var getMyUsername = function() {
  return this.username;
 };
 
-var userName = getMyUsername(); //Fix this
+var userName = getMyUsername.call(myUser); //Fix this
 
 //Above you're given an object, and  a function. What will the getMyUsername function return?
 //Note(no tests)
-  //Answer Here
+  //Answer Here it will return undefined.
 
 //In the example above, what is the 'this keyword' bound to when getMyUsername runs?
 
-  //Answer Here
+  //Answer Here this isn't bound to anything.
 
 
 //Fix the getMyUsername invocation (stored in the userName variable, at the bottom of the above code) so that userName will be equal to 'iliketurtles'.
